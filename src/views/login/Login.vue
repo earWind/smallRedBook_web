@@ -11,7 +11,12 @@
         class="demo-loginForm"
       >
         <el-form-item prop="account">
-          <el-input type="text" v-model="loginForm.account" autocomplete="off" placeholder="账号"></el-input>
+          <el-input
+            type="text"
+            v-model="loginForm.account"
+            autocomplete="off"
+            placeholder="账号"
+          ></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
@@ -22,7 +27,12 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="loading" @click.native.prevent="submitForm">登录</el-button>
+          <el-button
+            type="primary"
+            :loading="loading"
+            @click.native.prevent="submitForm"
+            >登录</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -64,7 +74,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         const query = route.query;
         if (query) {
           this.redirect = query.redirect;
@@ -79,6 +89,7 @@ export default {
         if (valid) {
           this.loading = true;
           setToken("token");
+          this.$store.dispatch("user/login", this.loginForm);
           this.$router.push({
             path: this.redirect || "/",
             query: this.otherQuery,

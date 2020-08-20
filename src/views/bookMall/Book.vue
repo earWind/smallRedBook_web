@@ -1,7 +1,5 @@
 <template>
-  <div>
-    home
-  </div>
+  <div>book</div>
 </template>
 
 <script>

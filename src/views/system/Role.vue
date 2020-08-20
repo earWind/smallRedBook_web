@@ -1,7 +1,5 @@
 <template>
-  <div>
-    home
-  </div>
+  <div>role</div>
 </template>
 
 <script>

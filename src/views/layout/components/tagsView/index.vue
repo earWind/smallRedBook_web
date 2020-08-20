@@ -41,7 +41,7 @@
 
 <script>
 import ScrollPane from "./ScrollPane.vue";
-// import path from "path";
+import path from "path";
 
 export default {
   name: "TagsView",
@@ -307,8 +307,5 @@ export default {
       }
     }
   }
-}
-.el-scrollbar__wrap {
-  height: 36px !important;
 }
 </style>
