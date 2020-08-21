@@ -5,7 +5,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Home",
+  created() {
+    console.log(this.$route);
+  },
+};
 </script>
 
 <style></style>

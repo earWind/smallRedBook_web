@@ -10,10 +10,10 @@
         label-width="100px"
         class="demo-loginForm"
       >
-        <el-form-item prop="account">
+        <el-form-item prop="username">
           <el-input
             type="text"
-            v-model="loginForm.account"
+            v-model="loginForm.username"
             autocomplete="off"
             placeholder="账号"
           ></el-input>
@@ -44,7 +44,7 @@ import { setToken } from "@/utils/auth";
 export default {
   name: "Login",
   data() {
-    let validateAccount = (rule, value, callback) => {
+    let validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入账号"));
       } else {
@@ -61,11 +61,11 @@ export default {
     return {
       loading: false,
       loginForm: {
-        account: "admin",
+        username: "admin",
         password: "123456",
       },
       rules: {
-        account: [{ validator: validateAccount, trigger: "blur" }],
+        account: [{ validator: validateUsername, trigger: "blur" }],
         password: [{ validator: validatePass, trigger: "blur" }],
       },
       redirect: null,

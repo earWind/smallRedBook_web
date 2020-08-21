@@ -11,6 +11,7 @@ NProgress.configure({
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
   const hasToken = getToken();
+  // 是否登录-(登录成功过后就会有token)
   if (hasToken) {
     if (to.path === "/login") {
       next({
@@ -19,16 +20,16 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done();
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0;
+      // 是否有权限
       if (hasRoles) {
         next();
       } else {
         try {
-          store.dispatch("user/login", {
-            username: "admin",
-            password: "123456",
-          });
+          const { roles } = await store.dispatch("user/getInfo");
+
           const accessRoutes = await store.dispatch(
-            "permission/generateRoutes"
+            "permission/generateRoutes",
+            roles
           );
           router.addRoutes(accessRoutes);
           next();
