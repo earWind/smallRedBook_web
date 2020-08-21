@@ -32,10 +32,11 @@ export default {
     activeIndex() {
       const route = this.$route;
       const { meta, path } = route;
-      if (meta.activeMenu) {
-        return meta.activeMenu;
+      if (meta.activeIndex) {
+        return meta.activeIndex;
       }
-      return path;
+      const paths = path.split("/");
+      return "/" + paths[paths.length - 1];
     },
   },
 };

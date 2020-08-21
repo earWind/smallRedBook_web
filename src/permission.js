@@ -2,7 +2,9 @@ import store from "./store";
 import router from "./router";
 import NProgress from "nprogress"; // 页面加载进度条
 import "nprogress/nprogress.css";
-import { getToken } from "@/utils/auth";
+import {
+  getToken
+} from "@/utils/auth";
 
 NProgress.configure({
   showSpinner: false,
@@ -25,14 +27,24 @@ router.beforeEach(async (to, from, next) => {
         next();
       } else {
         try {
-          const { roles } = await store.dispatch("user/getInfo");
-
+          // 获取权限
+          const {
+            roles
+          } = await store.dispatch("user/getInfo");
+          // 过滤路由
           const accessRoutes = await store.dispatch(
             "permission/generateRoutes",
             roles
           );
           router.addRoutes(accessRoutes);
-          next();
+          if (to.matched.length) {
+            next()
+          } else {
+            next({
+              ...to,
+              replace: true,
+            }); // 路由替换(直接next的话刷新会找不到页面--为啥？)
+          }
         } catch {
           next("/login");
           NProgress.done();

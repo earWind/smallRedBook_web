@@ -8,7 +8,7 @@
 export default {
   name: "Home",
   created() {
-    console.log(this.$route);
+    console.log(this.$route.path);
   },
 };
 </script>
